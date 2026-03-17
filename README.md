@@ -4,6 +4,8 @@ A full-stack, AI-powered Business Intelligence agent that bridges the gap betwee
 
 Designed for founders, sales leads, and operations managers, it directly answers complex queries about pipeline health, conversion rates, and operations in a conversational interface.
 
+**[ Try the Live Demo here!](https://agent-rho-eight.vercel.app/)**
+
 ## Features
 
 - **Live Data Integration:** Fetches real-time data from monday.com (Deals Pipeline & Work Orders boards) using GraphQL.
@@ -134,14 +136,23 @@ python3 -m pytest tests/ -v
 This app is split into two parts: the FastAPI backend and the React frontend. It is recommended to deploy them separately.
 
 ### 1. Backend (Render)
-Render makes deploying the backend incredibly easy using Infrastructure as Code. We have provided a `render.yaml` file at the root of the project.
+Render offers a free tier for web services that does not require adding a credit card when created manually.
 
 1. Push this repository to GitHub.
-2. Go to [Render](https://render.com/), sign in, and click **New → Blueprint**.
-3. Connect your GitHub repository.
-4. Render will automatically read the `render.yaml` and prompt you to input the `GEMINI_API_KEY`, `MONDAY_API_KEY`, `DEALS_BOARD_ID`, and `WORK_ORDERS_BOARD_ID`.
-5. Click **Apply**. Render will build and deploy the application.
-6. Once deployed, note down the URL of your new backend (e.g., `https://ai-agent-backend.onrender.com`).
+2. Go to [Render](https://render.com/) and sign in.
+3. Click the **"New +"** button at the top and select **Web Service**.
+4. Select **Build and deploy from a Git repository**.
+5. Connect your GitHub repository.
+6. Configure the service:
+   - Name: `ai-agent-backend`
+   - **Root Directory**: `backend`
+   - Environment: `Python 3`
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+7. In the **Environment Variables** section, add your API keys:
+   - `GEMINI_API_KEY`, `MONDAY_API_KEY`, `DEALS_BOARD_ID`, `WORK_ORDERS_BOARD_ID`
+   - `ENV` = `production`
+8. Click **Create Web Service**. Once deployed, note down the URL (e.g., `https://ai-agent-backend.onrender.com`).
 
 ### 2. Frontend (Vercel)
 Vercel is the industry standard for React and Vite apps.

@@ -128,3 +128,28 @@ To run the full backend testing suite (Data cleaners, API endpoints, Analysis se
 cd backend
 python3 -m pytest tests/ -v
 ```
+
+## Deployment
+
+This app is split into two parts: the FastAPI backend and the React frontend. It is recommended to deploy them separately.
+
+### 1. Backend (Render)
+Render makes deploying the backend incredibly easy using Infrastructure as Code. We have provided a `render.yaml` file at the root of the project.
+
+1. Push this repository to GitHub.
+2. Go to [Render](https://render.com/), sign in, and click **New → Blueprint**.
+3. Connect your GitHub repository.
+4. Render will automatically read the `render.yaml` and prompt you to input the `GEMINI_API_KEY`, `MONDAY_API_KEY`, `DEALS_BOARD_ID`, and `WORK_ORDERS_BOARD_ID`.
+5. Click **Apply**. Render will build and deploy the application.
+6. Once deployed, note down the URL of your new backend (e.g., `https://ai-agent-backend.onrender.com`).
+
+### 2. Frontend (Vercel)
+Vercel is the industry standard for React and Vite apps.
+
+1. Go to [Vercel](https://vercel.com/) and sign in.
+2. Click **Add New → Project** and import your GitHub repository.
+3. Vercel will auto-detect Vite. The Root Directory should be `frontend`. Edit the Root Directory setting to select the `frontend` folder.
+4. In the **Environment Variables** section, add:
+   - Name: `VITE_API_BASE`
+   - Value: `<YOUR_RENDER_BACKEND_URL>/api` (e.g., `https://ai-agent-backend.onrender.com/api`)
+5. Click **Deploy**. Vercel will build everything and give you a live shareable URL!

@@ -17,6 +17,7 @@ class Settings:
     WORK_ORDERS_BOARD_ID: str = os.getenv("WORK_ORDERS_BOARD_ID", "")
     PORT: int = int(os.getenv("PORT", "8000"))
     ENV: str = os.getenv("ENV", "development")
+    FRONTEND_URL: str = os.getenv("FRONTEND_URL", "")
 
     MONDAY_API_URL: str = "https://api.monday.com/v2"
 
